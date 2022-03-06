@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Rating Page</title>
+</head>
+<body>
+    
+    <form id = resumeForm method="post" style="width:60%;margin:auto;" enctype="multipart/form-data" target="_blank" >
+		<div  style="vertical-align: middle;text-align: center;">
+			<img src="/static/Home_page_image.png" style="width: 50px;height: 50px;display: inline-block;margin: 0px 0px 0px 15px;"></img>
+			<h2 style="text-align:center;font-family: sans-serif;font-weight: normal;display: inline-block;width: 52%;margin: 0 0 1px 3px;vertical-align: 15px;">Candidate Shortlisting</h2>
+		</div>
+		<div style="margin-top: 5%; padding: 5%; border-radius: 18px; background-color:rgba(215, 240, 252, 0.7);">
+			<div>
+				<h3 style="font-family: sans-serif;font-weight: normal">Upload Job Description:</h3>
+				<input type="file" name="reqFile">
+			</div>
+		</div>
+		<div style="margin-top: 5%; padding: 5%; border-radius: 18px; background-color:rgba(178, 248, 219, 0.5);">
+			<div>
+				<h3 style="margin-right:90px; font-family: sans-serif;font-weight: normal">Upload Resume:</h3>
+				<input type="file" name="resume_file" >
+			</div>
+			<div>
+				<h3 style="margin-right:90px; font-family: sans-serif;font-weight: normal">Candidate Details:</h3>
+				<table>
+					<tr>
+						<td>Name</td>
+						<td>
+							<input type="text" name="name" >
+						</td>
+					</tr>
+					<tr>
+						<td>Age</td>
+						<td>
+							<input type="text" name="age" >
+						</td>
+					</tr>
+					<tr>
+						<td>Gender</td>
+						<td>
+							<input type="text" name="gender" >
+						</td>
+					</tr>
+					<tr><td><h3 style="margin-right:90px; font-family: sans-serif;font-weight: normal">Candidate Personality Test:</h3></td></tr>
+					<tr>
+						<td>Enjoy New Experience or thing(Openness)</td>
+						<td>
+							<input type="radio" id="1" name="openness" value="1"><label for="1">1</label>
+							<input type="radio" id="2" name="openness" value="2"><label for="2">2</label>
+							<input type="radio" id="3" name="openness" value="3"><label for="3">3</label>
+							<input type="radio" id="4" name="openness" value="4"><label for="4">4</label>
+							<input type="radio" id="5" name="openness" value="5"><label for="5">5</label>
+							<input type="radio" id="6" name="openness" value="6"><label for="6">6</label>
+							<input type="radio" id="7" name="openness" value="7"><label for="7">7</label>
+							<input type="radio" id="8" name="openness" value="8"><label for="8">8</label>
+							<input type="radio" id="9" name="openness" value="9"><label for="9">9</label>
+							<input type="radio" id="10" name="openness" value="10"><label for="10">10</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							How Offen You Feel Negativity(Neuroticism)
+						</td>
+						<td>
+							<input type="radio" id="1" name="neuroticism" value="1"><label for="1">1</label>
+							<input type="radio" id="2" name="neuroticism" value="2"><label for="2">2</label>
+							<input type="radio" id="3" name="neuroticism" value="3"><label for="3">3</label>
+							<input type="radio" id="4" name="neuroticism" value="4"><label for="4">4</label>
+							<input type="radio" id="5" name="neuroticism" value="5"><label for="5">5</label>
+							<input type="radio" id="6" name="neuroticism" value="6"><label for="6">6</label>
+							<input type="radio" id="7" name="neuroticism" value="7"><label for="7">7</label>
+							<input type="radio" id="8" name="neuroticism" value="8"><label for="8">8</label>
+							<input type="radio" id="9" name="neuroticism" value="9"><label for="9">9</label>
+							<input type="radio" id="10" name="neuroticism" value="10"><label for="10">10</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Wishing to do one's work well and thoroughly(Conscientiousness)
+						</td>
+						<td>
+							<input type="radio" id="1" name="conscientiousness" value="1"><label for="1">1</label>
+							<input type="radio" id="2" name="conscientiousness" value="2"><label for="2">2</label>
+							<input type="radio" id="3" name="conscientiousness" value="3"><label for="3">3</label>
+							<input type="radio" id="4" name="conscientiousness" value="4"><label for="4">4</label>
+							<input type="radio" id="5" name="conscientiousness" value="5"><label for="5">5</label>
+							<input type="radio" id="6" name="conscientiousness" value="6"><label for="6">6</label>
+							<input type="radio" id="7" name="conscientiousness" value="7"><label for="7">7</label>
+							<input type="radio" id="8" name="conscientiousness" value="8"><label for="8">8</label>
+							<input type="radio" id="9" name="conscientiousness" value="9"><label for="9">9</label>
+							<input type="radio" id="10" name="conscientiousness" value="10"><label for="10">10</label>
+						</td>
+					</tr><tr>
+						<td>
+							How much would you like work with your peers(Agreeableness)
+						</td>
+						<td>
+							<input type="radio" id="1" name="agreeableness" value="1"><label for="1">1</label>
+							<input type="radio" id="2" name="agreeableness" value="2"><label for="2">2</label>
+							<input type="radio" id="3" name="agreeableness" value="3"><label for="3">3</label>
+							<input type="radio" id="4" name="agreeableness" value="4"><label for="4">4</label>
+							<input type="radio" id="5" name="agreeableness" value="5"><label for="5">5</label>
+							<input type="radio" id="6" name="agreeableness" value="6"><label for="6">6</label>
+							<input type="radio" id="7" name="agreeableness" value="7"><label for="7">7</label>
+							<input type="radio" id="8" name="agreeableness" value="8"><label for="8">8</label>
+							<input type="radio" id="9" name="agreeableness" value="9"><label for="9">9</label>
+							<input type="radio" id="10" name="agreeableness" value="10"><label for="10">10</label>
+						</td>
+					</tr><tr>
+						<td>
+							How outgoing and social interaction you like(Extraversion)
+						</td>
+						<td>
+							<input type="radio" id="1" name="extraversion" value="1"><label for="1">1</label>
+							<input type="radio" id="2" name="extraversion" value="2"><label for="2">2</label>
+							<input type="radio" id="3" name="extraversion" value="3"><label for="3">3</label>
+							<input type="radio" id="4" name="extraversion" value="4"><label for="4">4</label>
+							<input type="radio" id="5" name="extraversion" value="5"><label for="5">5</label>
+							<input type="radio" id="6" name="extraversion" value="6"><label for="6">6</label>
+							<input type="radio" id="7" name="extraversion" value="7"><label for="7">7</label>
+							<input type="radio" id="8" name="extraversion" value="8"><label for="8">8</label>
+							<input type="radio" id="9" name="extraversion" value="9"><label for="9">9</label>
+							<input type="radio" id="10" name="extraversion" value="10"><label for="10">10</label>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div style="margin-top:20px;text-align:center;">
+				<button type="submit"style="width: 20%;height: 25px;background: transparent;color: white;background-color: dimgrey;"  value="submit">Go</button>
+			 </div>
+			 <div style="margin:20px">
+				{% with messages = get_flashed_messages() %}
+				{% if messages %}
+				<ul class=flashes>
+					{% for message in messages %}
+					<li>{{ message }}</li>
+					{% endfor %}
+				</ul>
+				{% endif %}
+				{% endwith %}
+			</div>
+		</div>
+    </form>
+</body>
+</html>
