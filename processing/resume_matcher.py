@@ -1,6 +1,6 @@
-from ..preprocessing import docx_processing  as doc, textract_processing as txt
-from ..text_processing import tf_idf_cosine_similarity as tf_idf,doc2vec_comparison as d2v
-from ..text_processing import cv_cosine_similarity as cv
+from  preprocessing import docx_processing  as doc, textract_processing as txt
+from  text_processing import tf_idf_cosine_similarity as tf_idf,doc2vec_comparison as d2v
+from  text_processing import cv_cosine_similarity as cv
 import os
 
 # def process_doc2_vec_process(req_document,resume_docs):
@@ -60,7 +60,9 @@ def process_files(req_document,resume_docs):
     for element in sorted_doc_list:
         doc_rating_list = []
         doc_rating_list.append(os.path.basename(element[1]))
-        doc_rating_list.append("{:.0%}".format(element[0]))
+        # print("->>>>>>>>>>>>>", element[0])
+        # doc_rating_list.append("{:.0%}".format(element[0]))
+        doc_rating_list.append(element[0])
         final_doc_rating_list.append(doc_rating_list)
     return final_doc_rating_list
     # print('TF-IDF cosine similarity')

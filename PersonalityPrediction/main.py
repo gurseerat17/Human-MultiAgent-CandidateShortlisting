@@ -38,8 +38,8 @@ class train_model:
                 test_predict.append(int(i))
             y_pred = self.mul_lr.predict([test_predict])
             y_pred_prob = self.mul_lr.predict_proba([test_predict])
-            print(y_pred_prob)
-            return y_pred, max(y_pred_prob[0])*100
+            print(max(y_pred_prob[0][0], y_pred_prob[0][3]))
+            return y_pred, max(y_pred_prob[0][0], y_pred_prob[0][3])
         except:
             print("All Factors For Finding Personality Not Entered!")
 
@@ -67,8 +67,9 @@ def prediction_result(aplcnt_name, cv_path, personality_values):
     model.train()
     personality, confidence = model.test(personality_values)
     print("\n############# Predicted Personality #############\n")
-    print(personality, round(confidence, 2), "%")
-    return personality,round(confidence, 2)
+    # confidence = round(confidence, 2)
+    return personality,confidence
+
     # data = ResumeParser(cv_path).get_extracted_data()
     
     # try:

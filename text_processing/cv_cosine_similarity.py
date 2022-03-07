@@ -2,7 +2,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import stopwords as stp
 from sklearn.feature_extraction.text import CountVectorizer
-from ..preprocessing import cv_lemmetizer as cv_lemma
+from preprocessing import cv_lemmetizer as cv_lemma
 
 
 def get_binay_cosine_similarity(compare_doc,doc_corpus):

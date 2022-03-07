@@ -1,7 +1,7 @@
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import stopwords as stp
 from sklearn.feature_extraction.text import CountVectorizer
-from ..preprocessing import lemma_tagger as tag
+from preprocessing import lemma_tagger as tag
 
 
 lemmatizer = WordNetLemmatizer()
