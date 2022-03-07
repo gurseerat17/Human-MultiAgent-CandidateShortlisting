@@ -9,10 +9,10 @@
 	<table style="border-collapse: collapse;width:500px;margin:auto;background-color:#d6ffff;">
 		<tr > 
 		<td align="center" colspan="3" >
-		<h4>Resume Ranking according to the percentage match</h4>
+		<h4>Resume percentage match</h4>
 		</td>
 		</tr>
-         {% for item in result %}
+         {% for item in result_jobfit %}
             <tr>
 			   <td> {{ loop.index }}</td>
                <td> {{ item[0] }} </td>
@@ -20,6 +20,12 @@
             </tr>
          {% endfor %}
     </table>
+</div>
+<div align="center">
+    <h4>Personality Test Results</h4>
+    <p>
+        Trait: {{result_personality[0]}}    Confidence: {{result_personality[1]}}
+    </p>
 </div>
 </body>
 </html>

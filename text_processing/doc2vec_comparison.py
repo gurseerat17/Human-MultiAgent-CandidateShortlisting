@@ -1,7 +1,7 @@
 import gensim
 from gensim.models.doc2vec import TaggedDocument
 from gensim.parsing.preprocessing import remove_stopwords
-from preprocessing import nltk_tokenizer as nl_token
+from ..preprocessing import nltk_tokenizer as nl_token
 
 def get_doc2vec_similarity(req_doc,list_of_resume):
     train_corpus = list(read_corpus(list_of_resume))

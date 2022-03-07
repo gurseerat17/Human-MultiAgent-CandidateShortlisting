@@ -2,7 +2,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import stopwords as stp
-from preprocessing import tf_idf_lemmetizer as tf_idf_lemma
+from ..preprocessing import tf_idf_lemmetizer as tf_idf_lemma
 
 def get_tf_idf_cosine_similarity(compare_doc,doc_corpus):
     # lemmatizer = WordNetLemmatizer()

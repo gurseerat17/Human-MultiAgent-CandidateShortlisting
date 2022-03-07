@@ -1,6 +1,6 @@
-from preprocessing import docx_processing  as doc, textract_processing as txt
-from text_processing import tf_idf_cosine_similarity as tf_idf,doc2vec_comparison as d2v
-from text_processing import cv_cosine_similarity as cv
+from ..preprocessing import docx_processing  as doc, textract_processing as txt
+from ..text_processing import tf_idf_cosine_similarity as tf_idf,doc2vec_comparison as d2v
+from ..text_processing import cv_cosine_similarity as cv
 import os
 
 # def process_doc2_vec_process(req_document,resume_docs):

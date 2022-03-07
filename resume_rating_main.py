@@ -1,8 +1,9 @@
 import os
 from flask import Flask, flash, request, redirect, render_template,url_for
-from constants import file_constants as cnst
-from processing import resume_matcher
-from utils import file_utils
+from .constants import file_constants as cnst
+from .processing import resume_matcher
+from .utils import file_utils
+from .PersonalityPrediction import main
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','docx'])
 app = Flask(__name__)
@@ -24,11 +25,12 @@ def failure():
 
 @app.route('/success/<name>')
 def success(name):
-   return 'Files %s has been selected' %name
+   return 'Files %s has been selecte3d' %name
 
 @app.route('/', methods=['POST', 'GET'])
 def check_for_file():
-    if request.method == 'POST':
+   
+   if request.method == 'POST':
         # check if the post request has the file part
         if 'reqFile' not in request.files:
            flash('Requirements document can not be empty')
@@ -51,11 +53,22 @@ def check_for_file():
            filename = resume_file.filename
            abs_paths.append(cnst.UPLOAD_FOLDER + '\\' + filename)
            resume_file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-           result = resume_matcher.process_files(req_document,abs_paths)
+           result_jobfit = resume_matcher.process_files(req_document,abs_paths)
+           
+           name=request.form['name']
+           age=request.form['age']
+           gender=request.form['gender']
+           openness=request.form['openness']
+           neuroticism=request.form['neuroticism']
+           conscientiousness=request.form['conscientiousness']
+           agreeableness=request.form['agreeableness']
+           extraversion=request.form['extraversion']
+         
+           result_trait,result_personalityconf= main.prediction_result(name,abs_paths,(gender,age,openness,neuroticism,conscientiousness,agreeableness,extraversion))
         #    for file_path in abs_paths:
             #    file_utils.delete_file(file_path)
 
-           return render_template("resume_results.html", result=result)
+           return render_template("resume_results.html", result_jobfit=result_jobfit, result_personality=[result_trait,result_personalityconf])
         else:
            flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
            return redirect(request.url)
