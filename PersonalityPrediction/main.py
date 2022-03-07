@@ -11,7 +11,7 @@ from sklearn import datasets, linear_model
 class train_model:
     
     def train(self):
-        data =pd.read_csv('C:\\Users\\nikid\\btp\\Human-MultiAgent-CandidateShortlisting\\PersonalityPrediction\\training_dataset.csv')
+        data =pd.read_csv('C:\\Users\\Asus\\Downloads\\Sem8\\BTP\\MultiAgentCVAnalysis\\PersonalityPrediction\\training_dataset.csv')
         array = data.values
 
         for i in range(len(array)):
