@@ -10,10 +10,10 @@ from sklearn import datasets, linear_model
 
 class train_model:
     
-    def train(self):
-        data =pd.read_csv('C:\\Users\\Asus\\Downloads\\Sem8\\BTP\\MultiAgentCVAnalysis\\PersonalityPrediction\\training_dataset.csv')
-        array = data.values
-
+    def train(self,samplepercent):
+        data =pd.read_csv('C:\\Users\\nikid\\btp\\Personality-Prediction-Through-CV\\training_dataset.csv')
+        array = data.sample(frac=samplepercent).values
+        print('training dataset size=' ,array.size)
         for i in range(len(array)):
             if array[i][0]=="Male":
                 array[i][0]=1
@@ -54,19 +54,18 @@ def check_type(data):
         return str_list
     else:   return str(data)
 
-def prediction_result(aplcnt_name, cv_path, personality_values):
+def prediction_result(aplcnt_name, cv_path, personality_values,samplepercent,model):
     "after applying a job"
     # top.withdraw()
     applicant_data={"Candidate Name":aplcnt_name,  "CV Location":cv_path}
     
     age = personality_values[1]
     
-    print("\n############# Candidate Entered Data #############\n")
-    print(applicant_data, personality_values)
-    model = train_model()
-    model.train()
+    # print("\n############# Candidate Entered Data #############\n")
+    # print(applicant_data, personality_values)
+    
     personality, confidence = model.test(personality_values)
-    print("\n############# Predicted Personality #############\n")
+    # print("\n############# Predicted Personality #############\n")
     # confidence = round(confidence, 2)
     return personality,confidence
 
@@ -211,7 +210,7 @@ def OpenFile(b4):
 
 if __name__ == "__main__":
     model = train_model()
-    model.train()
+    model.train(1.0)
 
     # root = Tk()
     # root.geometry('700x500')

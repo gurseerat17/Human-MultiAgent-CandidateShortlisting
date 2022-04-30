@@ -4,7 +4,7 @@ from flask import Flask, flash, request, redirect, render_template,url_for
 from constants import file_constants as cnst
 from processing import resume_matcher
 from utils import file_utils
-from PersonalityPrediction import main
+from PersonalityPrediction import main 
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','docx'])
 app = Flask(__name__)

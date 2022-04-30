@@ -27,7 +27,7 @@ def process_files(req_document,resume_docs):
 
     # for doct in resume_docs:
     #     resume_doc_text.append(doc.get_content_as_string(doct))
-    print("\n\n----------------------", req_document,"---------------------\n\n")
+    # print("\n\n----------------------", req_document,"---------------------\n\n")
     req_doc_text = txt.get_content_as_string(req_document)
     # print('The start' * 5)
     resume_doc_text = []
