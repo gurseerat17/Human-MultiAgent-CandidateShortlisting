@@ -24,6 +24,11 @@ def human_model(result_jobfit,result_personality):
    global conf_jobfit
    global conf_personalityfit
    global w1, w2, threshold, l
+   global n_total, n_jf_wrong, n_pf_wrong
+
+   n_total = 0
+   n_jf_wrong = 0
+   n_pf_wrong = 0
 
    accuracy_jobfit = 0.84
    accuracy_personalityfit = 0.79
@@ -49,6 +54,25 @@ def human_model(result_jobfit,result_personality):
    E_solve = 1 - l 
 
    return E_accept, E_solve
+
+def update_human_mental_model(is_hire, result_jobfit, result_personalityconf):
+
+   n_total = n_total + 1
+   # classifier_hire = True if classifier_decision>0.3 else False
+   jobfit_hire = True if result_jobfit>0.3 else False
+   personality_hire = True if result_personalityconf>0.2 else False
+
+   if jobfit_hire == is_hire :
+      w1 = max(1, w1 + w1*((1-n_jf_wrong)/n_total)*0.25*result_jobfit)
+   else:
+      n_jf_wrong = n_jf_wrong + 1
+      w1 = max(0, w1 - w1*(n_jf_wrong/n_total)*0.5*result_jobfit)
+
+   if personality_hire == is_hire :
+      w2 = max(1, w2 + w2*((1-n_pf_wrong)/n_total)*0.25*result_personalityconf)
+   else:
+      n_pf_wrong = n_pf_wrong + 1
+      w2 = max(0, w2 + w2*(n_pf_wrong/n_total)*0.5*result_personalityconf)
 
 @app.route('/')
 def upload_form():
@@ -91,13 +115,13 @@ def check_for_file():
            result_jobfit = resume_matcher.process_files(req_document,abs_paths)
            
            name="ABC"
-           age=23
-           gender=0
-           openness=8
-           neuroticism=8
-           conscientiousness=8
-           agreeableness=8
-           extraversion=8
+         #   age=23
+         #   gender=0
+         #   openness=8
+         #   neuroticism=8
+         #   conscientiousness=8
+         #   agreeableness=8
+         #   extraversion=8
            
          #   TODO name=request.form['name']
            age=request.form['age']
@@ -108,15 +132,16 @@ def check_for_file():
            agreeableness=request.form['agreeableness']
            extraversion=request.form['extraversion']
          
-           result_trait,result_personalityconf= main.prediction_result(name,abs_paths,(gender,age,openness,neuroticism,conscientiousness,agreeableness,extraversion))
+           result_trait,result_personalityconf,is_hire= main.prediction_result(name,abs_paths,(gender,age,openness,neuroticism,conscientiousness,agreeableness,extraversion))
         #    for file_path in abs_paths:
             #    file_utils.delete_file(file_path)
            
            E_accept, E_solve = human_model(result_jobfit[0][1], result_personalityconf)
-           
-         #   if E_accept > E_solve:
 
            classifier_decision = result_jobfit[0][1]*w1 + result_personalityconf*w2
+
+           update_human_mental_model(is_hire, result_jobfit, result_personalityconf)
+           print("w1: " ,w1,"w2: " ,w2)
 
            return render_template("resume_results.html", result_jobfit=result_jobfit, result_personality=[result_trait,result_personalityconf], E_accept = E_accept, E_solve = E_solve, classifier_decision = classifier_decision)
         else:

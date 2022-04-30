@@ -35,16 +35,30 @@ def kmeans_fit():
     df_model = data.drop('country', axis=1)
 
     # I define 5 clusters and fit my model
-    kmeans = KMeans(n_clusters=5)
+    kmeans = KMeans(n_clusters=4)
     k_fit = kmeans.fit(df_model)
 
     pd.options.display.max_columns = 10
     predictions = k_fit.labels_
-    df_model['Clusters'] = predictions
-    df_model.head()
+    # print("hi")
+    
+    # from sklearn.decomposition import PCA
+
+    # pca = PCA(n_components=2)
+    # pca_fit = pca.fit_transform(df_model)
+    # print("ki")
+    # df_pca = pd.DataFrame(data=pca_fit, columns=['PCA1', 'PCA2'])
+
+    # df_pca['Clusters'] = predictions
+    # df_pca.head()
+    # plt.figure(figsize=(10,10))
+    # sns.scatterplot(data=df_pca, x='PCA1', y='PCA2', hue='Clusters', palette='Set2', alpha=0.8)
+    # plt.title('Personality Clusters after PCA');
+    # plt.imshow()
+
     return k_fit
 
-def prediction_result(k_fit, personality_values):
+def prediction_result(k_fit, personality_values, is_hire):
 
     my_data = pd.read_csv('personality-tests.csv', sep='\t')
 
@@ -70,7 +84,7 @@ def prediction_result(k_fit, personality_values):
         my_data[opn[idx]]=openness
 
     my_personality = k_fit.predict(my_data)
-    print('My Personality Cluster: ', my_personality)
+    # print('My Personality Cluster: ', my_personality)
 
     my_sums = pd.DataFrame()
     my_sums['extroversion'] = my_data[ext].sum(axis=1)/10
@@ -82,14 +96,16 @@ def prediction_result(k_fit, personality_values):
     # print('Sum of my question groups')
     # my_sums
 
-    my_sum = my_sums.drop('cluster', axis=1)
-    plt.bar(my_sum.columns, my_sum.iloc[0,:], color='green', alpha=0.2)
-    plt.plot(my_sum.columns, my_sum.iloc[0,:], color='red')
-    plt.title('Cluster 2')
-    plt.xticks(rotation=45)
-    plt.ylim(0,4);
+    # my_sum = my_sums.drop('cluster', axis=1)
+    # plt.bar(my_sum.columns, my_sum.iloc[0,:], color='green', alpha=0.2)
+    # plt.plot(my_sum.columns, my_sum.iloc[0,:], color='red')
+    # plt.title('Cluster 2')
+    # plt.xticks(rotation=45)
+    # plt.ylim(0,4);
+    # print(my_personality)
     return my_personality
 
 if __name__ == "__main__":
     kfit = kmeans_fit()
-    prediction_result(kfit, (9,0,8,7,5))
+    restl=prediction_result(kfit, (9,0,8,7,5))
+    # print(restl)

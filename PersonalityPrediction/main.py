@@ -54,7 +54,7 @@ def check_type(data):
         return str_list
     else:   return str(data)
 
-def prediction_result(aplcnt_name, cv_path, personality_values):
+def prediction_result(aplcnt_name, cv_path, personality_values, is_hire):
     "after applying a job"
     # top.withdraw()
     applicant_data={"Candidate Name":aplcnt_name,  "CV Location":cv_path}
@@ -68,7 +68,7 @@ def prediction_result(aplcnt_name, cv_path, personality_values):
     personality, confidence = model.test(personality_values)
     print("\n############# Predicted Personality #############\n")
     # confidence = round(confidence, 2)
-    return personality,confidence
+    return personality, confidence, is_hire 
 
     # data = ResumeParser(cv_path).get_extracted_data()
     
