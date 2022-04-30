@@ -16,13 +16,17 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def getA(x, y, B):
-   return 1 if ( w1*x + w2*y > threshold ) else B
+   return 1.0 if ( w1*x + w2*y > threshold ) else B
 
 def human_model(result_jobfit,result_personality):
    
+   global accuracy_jobfit, accuracy_personalityfit
    global conf_jobfit
    global conf_personalityfit
    global w1, w2, threshold, l
+
+   accuracy_jobfit = 0.84
+   accuracy_personalityfit = 0.79
 
    conf_jobfit = 1.0
    conf_personalityfit = 1.0
@@ -30,11 +34,11 @@ def human_model(result_jobfit,result_personality):
    h_jobfit =  result_jobfit*conf_jobfit
    h_personality =  result_personality*conf_personalityfit
 
-   B = -1
+   B = -0.65
    w1 =  0.75
    w2 = 0.25
    #TODO
-   threshold = 0.5
+   threshold = 0.25
    l = 0.8
    
    print("\n\n----", (h_jobfit*h_personality) , h_jobfit*(1-h_personality)*getA(h_jobfit, 1-h_personality,B) , h_personality*(1-h_jobfit)*getA( 1-h_jobfit, h_personality, B) , (1-h_jobfit)*(1-h_personality)*B ,"\n",getA(h_jobfit, 1-h_personality,B) ,getA( 1-h_jobfit, h_personality, B), "\n\n\n\n----------")
@@ -68,7 +72,7 @@ def check_for_file():
            return redirect(request.url)
         if 'resume_file' not in request.files:
            flash('Select at least one resume File to proceed further')
-           return redirect(request.url)
+           return redirect(request.url) 
         file = request.files['reqFile']
         if file.filename == '':
            flash('Requirement document has not been selected')
@@ -86,7 +90,16 @@ def check_for_file():
            resume_file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
            result_jobfit = resume_matcher.process_files(req_document,abs_paths)
            
-           name=request.form['name']
+           name="ABC"
+           age=23
+           gender=0
+           openness=8
+           neuroticism=8
+           conscientiousness=8
+           agreeableness=8
+           extraversion=8
+           
+         #   TODO name=request.form['name']
            age=request.form['age']
            gender=request.form['gender']
            openness=request.form['openness']
@@ -101,8 +114,11 @@ def check_for_file():
            
            E_accept, E_solve = human_model(result_jobfit[0][1], result_personalityconf)
            
+         #   if E_accept > E_solve:
 
-           return render_template("resume_results.html", result_jobfit=result_jobfit, result_personality=[result_trait,result_personalityconf], E_accept = E_accept, E_solve = E_solve)
+           classifier_decision = result_jobfit[0][1]*w1 + result_personalityconf*w2
+
+           return render_template("resume_results.html", result_jobfit=result_jobfit, result_personality=[result_trait,result_personalityconf], E_accept = E_accept, E_solve = E_solve, classifier_decision = classifier_decision)
         else:
            flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
            return redirect(request.url)
